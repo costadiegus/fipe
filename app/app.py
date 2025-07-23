@@ -348,7 +348,7 @@ def show_history_screen():
         col1, col2, col3, col4 = st.columns(4)
 
         with col1:
-            st.metric("📈 Total de Predições", len(history_df))
+            st.metric("📈 Total de Predições Avaliadas", len(history_df))
 
         with col2:
             good_predictions = history_df["is_good_prediction"].sum()
