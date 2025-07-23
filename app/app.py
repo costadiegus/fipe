@@ -177,7 +177,7 @@ def show_input_screen(car_model):
         history_df = load_prediction_history()
 
         if len(history_df) > 0:
-            st.metric("📈 Total de Predições", len(history_df))
+            st.metric("📈 Total de Predições Avaliadas", len(history_df))
 
             good_predictions = history_df["is_good_prediction"].sum()
             accuracy_pct = (good_predictions / len(history_df)) * 100
