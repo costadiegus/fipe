@@ -18,7 +18,7 @@ class CarPriceModel:
         self.X_columns = None
         self.model_trained = False
 
-    def load_and_preprocess_data(self, csv_path="dataset/fipe_cars.csv"):
+    def load_and_preprocess_data(self, csv_path="app/dataset/fipe_cars.csv"):
         """Carrega e preprocessa os dados"""
         try:
             self.df = pd.read_csv(csv_path, encoding="latin1")
