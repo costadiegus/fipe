@@ -229,7 +229,7 @@ def show_result_screen():
             with col_info2:
                 st.markdown(f"**⛽ Combustível:** {prediction_data['fuel']}")
                 st.markdown(f"**⚙️ Câmbio:** {prediction_data['gear']}")
-                st.markdown(f"**🔧 Motor:** {prediction_data['engine_size']} L")
+                st.markdown(f"**🔧 Motor:** {prediction_data['engine_size']:.1f} L")
 
             st.markdown("</div>", unsafe_allow_html=True)
 
