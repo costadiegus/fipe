@@ -89,7 +89,7 @@ def show_input_screen(car_model):
         # Campos de entrada
         year_of_reference = st.selectbox(
             "🗓️ Ano de Referência da Tabela FIPE",
-            options=[2021, 2022, 2023, 2024],
+            options=[2021, 2022, 2023, 2024, 2025],
             index=2,
         )
 
