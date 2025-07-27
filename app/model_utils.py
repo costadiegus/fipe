@@ -4,7 +4,7 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -82,7 +82,12 @@ class CarPriceModel:
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, test_size=0.2, random_state=42
         )
-
+        # --- Escalonamento ---
+        self.scaler = MinMaxScaler(feature_range=(0, 1))
+        self.scaler.fit(X_train)  # ajuste apenas no treino
+        X_train_scaled = self.scaler.transform(X_train)
+        X_test_scaled = self.scaler.transform(X_test)
+        X_train, X_test = X_train_scaled, X_test_scaled
         # Treinar modelo
         self.model = DecisionTreeRegressor(random_state=42)
         # self.model = RandomForestRegressor(
@@ -160,7 +165,8 @@ class CarPriceModel:
             final_car_df = car_df.reindex(columns=self.X_columns, fill_value=0)
 
             # Fazer predição
-            predicted_price = self.model.predict(final_car_df)
+            final_car_scaled = self.scaler.transform(final_car_df)
+            predicted_price = self.model.predict(final_car_scaled)
 
             return predicted_price[0]
 
