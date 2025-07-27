@@ -18,6 +18,7 @@ class CarPriceModel:
         self.le_model = None
         self.X_columns = None
         self.model_trained = False
+        self.scaler = None
 
     def load_and_preprocess_data(self, csv_path="app/dataset/fipe_cars.csv"):
         """Carrega e preprocessa os dados"""
