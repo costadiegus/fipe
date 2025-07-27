@@ -18,7 +18,7 @@ class CarPriceModel:
         self.le_model = None
         self.X_columns = None
         self.model_trained = False
-        self.scaler = None
+        self.scaler = MinMaxScaler(feature_range=(0, 1))
 
     def load_and_preprocess_data(self, csv_path="app/dataset/fipe_cars.csv"):
         """Carrega e preprocessa os dados"""
@@ -84,7 +84,6 @@ class CarPriceModel:
             X, y, test_size=0.2, random_state=42
         )
         # --- Escalonamento ---
-        self.scaler = MinMaxScaler(feature_range=(0, 1))
         self.scaler.fit(X_train)  # ajuste apenas no treino
         X_train_scaled = self.scaler.transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)
@@ -183,6 +182,7 @@ class CarPriceModel:
                 "le_brand": self.le_brand,
                 "le_model": self.le_model,
                 "X_columns": self.X_columns,
+                "scaler": self.scaler,
             }
             with open(filepath, "wb") as f:
                 pickle.dump(model_data, f)
@@ -199,6 +199,7 @@ class CarPriceModel:
             self.le_brand = model_data["le_brand"]
             self.le_model = model_data["le_model"]
             self.X_columns = model_data["X_columns"]
+            self.scaler = model_data["scaler"]
             self.model_trained = True
             return True
         return False
